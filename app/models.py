@@ -16,6 +16,12 @@ class User(UserMixin, db.Model):
 	def check_password(self, password):
 		return self.password
 
+class Record(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	record = db.Column(db.String(100))
+	def __repr__(self):
+		return 'Record {}'.format(self.record)
+
 @login.user_loader
 def load_user(id):
 	return User.query.get(int(id))

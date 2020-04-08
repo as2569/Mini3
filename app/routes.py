@@ -1,9 +1,9 @@
-from flask import render_template, flash, redirect, url_for, request, session
+from flask import render_template, flash, redirect, url_for, request, session, jsonify
 from app import app, db
 from flask  import current_app
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Record
 from werkzeug.urls import url_parse
 from flask import request
 from app.calculator import Calculator
@@ -13,6 +13,18 @@ from app.calculator import Calculator
 @login_required
 def index():
 	return render_template('index.html', title='Home Page')
+
+@app.route('/updateTable')
+def updateTable():
+	data = {
+	"data":[{}]
+	}
+
+	d = db.session.query(Record)
+	for r in d:
+		data['data'].append({'record' : str(r)})
+
+	return jsonify(data)
 
 @app.route('/calculator')
 def calculator():
@@ -58,8 +70,12 @@ def update():
 				numResult = calc.div(num1i, num2i)
 			if session['operand'] == "*":
 				numResult = calc.mul(num1i, num2i)
+			recordToSave = request.form['display'] + " =  " + str(numResult)
 			display = str(numResult)
 			session['num2s'] = "0"
+			rec = Record(record = recordToSave)
+			db.session.add(rec)
+			db.session.commit()
 		else:
 			display = request.form['display']
 	if buttonType == "C":

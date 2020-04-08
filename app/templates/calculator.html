@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Calculator</h1>
+	<div class="container-fluid">
+
+	<div>
+	<h2>Result</h2>
+	<span id="target"></span>
+	</div>	
+
+      	<div class="buttons">
+        	<button name="d" class="nums btn btn-default" value="7">7</button>
+        	<button name="d" class="nums btn btn-default" value="8">8</button>
+        	<button name="d" class="nums btn btn-default" value="9">9</button>
+        	<button name="o" class="btn-operate btn btn-default" value="/">/</button>
+      	</div>
+
+      	<div class="buttons">
+        	<button name="d" class="nums btn btn-default" value="4">4</button>
+        	<button name="d" class="nums btn btn-default" value="5">5</button>
+        	<button name="d" class="nums btn btn-default" value="6">6</button>
+	        <button name="o" class="btn-operate btn btn-default" value="*">x</button>
+      	</div>
+
+      	<div class="buttons">
+        	<button name="d" class="nums btn btn-default" value="1">1</button>
+	        <button name="d" class="nums btn btn-default" value="2">2</button>
+	        <button name="d" class="nums btn btn-default" value="3">3</button>
+        	<button name="o" class="btn-operate btn btn-default" value="-">-</button>
+      	</div>
+
+      	<div class="buttons">
+		<button name="C" class="btn-clear btn btn-danger" id="clearButton">C</button>
+        	<button name="d" class="nums btn-zero btn btn-default" value="0">0</button>
+	        <button name="=" class="btn-equal btn btn-info" id="resultButton">=</button>
+        	<button name="o" class="btn-operate btn btn-default" value="+">+</button>
+      	</div>
+
+	<table id="table" class="display" style="width:80%">
+        	<thead>
+            	<tr>
+                <th>record</th>
+                </tr>
+                </thead>
+  	</table>
+
+<script>
+function setupData() {
+    $(document).ready(function () {
+        $('#table').DataTable({
+            "ajax": {
+                "url": "/updateTable", 
+                "dataType": "json",
+                "dataSrc": "data",
+		"contentType":"application/json"
+            },
+            "columns": [
+                {"data": "record"}
+            ]
+        });
+    });
+}
+//$( window ).on( "load", setupData );
+
+</script>
+</div>
+
+{% endblock %}
