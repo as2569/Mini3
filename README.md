@@ -8,7 +8,7 @@ Login
 ![Interface](https://github.com/as2569/Mini3/blob/master/images/signin.png)
 
 Registration
-![Interface](https://github.com/as2569/Mini3/blob/master/images/registration.png)
+![Interface](https://github.com/as2569/Mini3/blob/master/images/register.png)
 
 Only logged users
 ![Interface](https://github.com/as2569/Mini3/blob/master/images/logged_in.png)
