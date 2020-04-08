@@ -1,4 +1,6 @@
 import os
+from flask import Flask, session
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
@@ -7,3 +9,12 @@ class Config(object):
 		'sqlite:///' + os.path.join(basedir, 'app.db')
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	TEMPLATES_AUTO_RELOAD = True
+
+	num1s = ''
+	num2s = ''
+	num1i = 0
+	num2i = 0
+	numResult = 0
+	operand = None
+	step = 0
+
