@@ -32,16 +32,16 @@ def update():
 	buttonValue = request.form['buttonValue']
 	if buttonType == 'd':
 		if session['step'] == 0:
-			session['num1s'] = session['num1s'] + buttonValue
-			display = request.form['display'] + buttonValue
+			if request.form['display'] == "0":
+				session['num1s'] = buttonValue
+				display = buttonValue
+			else:
+				session['num1s'] = session['num1s'] + buttonValue
+				display = request.form['display'] + buttonValue
 		if session['step'] == 1:
 			session['num2s'] = session['num2s'] + buttonValue
 			display = request.form['display'] + buttonValue
 	if buttonType == 'o':
-#		if session['step'] == 0:
-#			session['num1i'] = int(session['num1s'])
-		#if session['step'] == 2:
-		#	session['num2i'] = int(session['num2s'])
 		session['step'] = 1
 		session['operand'] = buttonValue
 		display = request.form['display'] + " " + session['operand'] + " "
@@ -49,17 +49,23 @@ def update():
 		if session['step'] == 1:
 			num1i = int(session['num1s'])
 			num2i = int(session['num2s'])
+			calc = Calculator()
 			if session['operand'] == "+":
-				calc = Calculator()
 				numResult = calc.add(num1i, num2i)
-				#numResult = calc.add(session['num1i'], session['num2i'])
-			#display = request.form['display'] + " " + str(numResult)
+			if session['operand'] == "-":
+				numResult = calc.sub(num1i, num2i)
+			if session['operand'] == "/":
+				numResult = calc.div(num1i, num2i)
+			if session['operand'] == "*":
+				numResult = calc.mul(num1i, num2i)
 			display = str(numResult)
+			session['num2s'] = "0"
 		else:
 			display = request.form['display']
+	if buttonType == "C":
+		session['step'] = 0
+		display = "0"
 
-	#result = request.form['display'] + buttonValue
-	#result = display
 	return display
 
 @app.route('/login', methods=['GET', 'POST'])
