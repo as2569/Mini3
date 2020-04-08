@@ -11,7 +11,7 @@ Registration
 ![Interface](https://github.com/as2569/Mini3/blob/master/images/register.png)
 
 Only logged users
-![Interface](https://github.com/as2569/Mini3/blob/master/images/logged _in.png)
+![Interface](https://github.com/as2569/Mini3/blob/master/images/logged%20_in.png)
 
 Calc
 ![Interface](https://github.com/as2569/Mini3/blob/master/images/calc1.png)
